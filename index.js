@@ -53,14 +53,12 @@ app.put('/produtos/:id', (req, res) => {
     const { id } = req.params;
     const { nome, preco, descricao } = req.body;
 
-    // Encontra o índice do produto na lista de produtos
     const index = produtos.findIndex(p => p.id === parseInt(id));
 
     if (index === -1) {
         return res.status(404).json({ error: 'Produto não encontrado.' });
     }
 
-    // Atualiza os dados completos do produto com os novos dados fornecidos
     produtos[index] = {
         id: parseInt(id),
         nome: nome || produtos[index].nome,
@@ -70,7 +68,6 @@ app.put('/produtos/:id', (req, res) => {
 
     res.status(200).json({ message: 'Produto atualizado com sucesso.', updatedProduct: produtos[index] });
 });
-
 
 app.patch('/produtos/:id', (req, res) => {
     const { id } = req.params;
